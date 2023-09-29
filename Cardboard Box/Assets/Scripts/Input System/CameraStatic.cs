@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CameraStatic : MonoBehaviour{
@@ -11,7 +12,6 @@ public class CameraStatic : MonoBehaviour{
 
     [SerializeField]
     private float alphaValue = 0.5f;
-    private int wallNum = 0;
 
     private void Start(){
         currTransparent = new List<Collider>();
@@ -20,29 +20,23 @@ public class CameraStatic : MonoBehaviour{
     // Update is called once per frame
     private void Update(){
         wallHits = Physics.OverlapBox(halfwayPoint.transform.position, new Vector3(1, 4, 3));
+        wallHits.ToList<Collider>();
 
         foreach(var wall in wallHits){
             if(wall.gameObject.tag == "Wall"){
                 if (!currTransparent.Contains(wall)){
-                    Debug.Log("wall hit");
                     SemiTransparent(wall.gameObject.GetComponent<Renderer>().material);
                     currTransparent.Add(wall);
                 }
-                
-                wallNum++;
             }
-        }
-        
-        if (wallNum == 0 && currTransparent.Count > 0){
-            Debug.Log("Capacity " + currTransparent.Count);
-            foreach(var wall in currTransparent){
-                Debug.Log("wall reverted");
-                Opaque(wall.gameObject.GetComponent<Renderer>().material);
-            }
-            currTransparent.Clear();
         }
 
-        wallNum = 0;
+        for(int i = 0; i < currTransparent.Count; i++){
+            if (!wallHits.Contains(currTransparent[i])){
+                Opaque(currTransparent[i].gameObject.GetComponent<Renderer>().material);
+                currTransparent.Remove(currTransparent[i]);
+            }
+        }
     }
     void LateUpdate(){
         transform.position = camPosition.transform.position;
