@@ -38,7 +38,7 @@ public class EnemyFOV : MonoBehaviour
                 //checks if theres obstacles obscuring players/obstacles
                 if(!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacles))
                 {
-                    Debug.Log("Enemy Contact!");
+                    //Debug.Log("Enemy Contact!");
                 }
             }
         }
