@@ -10,7 +10,17 @@ public class EnemyFOV : MonoBehaviour
 
     public LayerMask playerTarget;
     public LayerMask obstacles;
+    public bool canSeeTarget = false;
 
+    //enemy stats related
+    //public EnemyMobStatus enemyStats;
+    //public int targetArrayLenght = 0;
+    public Transform targetPlayer = null;
+
+    private void Awake()
+    {
+        //enemyStats = gameObject.GetComponent<EnemyMobStatus>();
+    }
     void Start()
     {
         StartCoroutine("FindTargetsWithDelay", .2f);    
@@ -27,6 +37,7 @@ public class EnemyFOV : MonoBehaviour
     {
         //Checks players/targets within view radius
         Collider[] targetsWithinViewRadius = Physics.OverlapSphere(transform.position, viewRadius, playerTarget);
+        //targetArrayLenght = targetsWithinViewRadius.Length;
         for (int i=0; i< targetsWithinViewRadius.Length; i++)
         {
             Transform target = targetsWithinViewRadius[i].transform;
@@ -37,8 +48,17 @@ public class EnemyFOV : MonoBehaviour
                 float dstToTarget = Vector3.Distance(transform.position, target.position);
                 //checks if theres obstacles obscuring players/obstacles
                 if(!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacles))
+                {   
+                    canSeeTarget = true;
+                    //checks if target is player for ai
+                    if(targetsWithinViewRadius[i].tag=="Player")
+                        targetPlayer = target; //transform to be stored for ai to retrieve
+                }
+                else
                 {
                     //Debug.Log("Enemy Contact!");
+                    canSeeTarget = false;
+                    targetPlayer = null;
                 }
             }
         }
