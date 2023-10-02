@@ -19,11 +19,11 @@ public class CameraStatic : MonoBehaviour{
 
     // Update is called once per frame
     private void Update(){
-        wallHits = Physics.OverlapBox(halfwayPoint.transform.position, new Vector3(1, 4, 3));
+        wallHits = Physics.OverlapBox(halfwayPoint.transform.position, new Vector3(0.5f, 4, 3));
         wallHits.ToList<Collider>();
 
         foreach(var wall in wallHits){
-            if(wall.gameObject.tag == "Wall"){
+            if(wall.gameObject.tag == "Wall" || wall.gameObject.tag == "Border"){
                 if (!currTransparent.Contains(wall)){
                     SemiTransparent(wall.gameObject.GetComponent<Renderer>().material);
                     currTransparent.Add(wall);
@@ -45,7 +45,7 @@ public class CameraStatic : MonoBehaviour{
     void OnDrawGizmosSelected(){
         // Draw a semitransparent red cube at the transforms position
         Gizmos.color = new Color(1, 0, 0, 0.5f);
-        Gizmos.DrawCube(halfwayPoint.transform.position, new Vector3(1, 8, 6));
+        Gizmos.DrawCube(halfwayPoint.transform.position, new Vector3(0.5f, 8, 6));
     }
 
     void SemiTransparent(Material mat){
