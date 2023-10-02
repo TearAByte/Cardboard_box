@@ -6,15 +6,31 @@ using UnityEngine;
 public class CameraStatic : MonoBehaviour{
     [SerializeField]
     private GameObject camPosition, halfwayPoint;
-    [SerializeField]
     private List<Collider> currTransparent;
     private Collider[] wallHits;
+
+    //for camera hitting map boundary
+    [SerializeField]
+    private MeshCollider mapBounds;
+    [SerializeField]
+    private Camera mainCam;
+
+    private float xMin, xMax, zMin, zMax, camX, camZ;
+    private float camOrthoSize, camRatio;
 
     [SerializeField]
     private float alphaValue = 0.5f;
 
     private void Start(){
         currTransparent = new List<Collider>();
+
+        xMin = mapBounds.bounds.min.x;
+        xMax = mapBounds.bounds.max.x;
+        zMin = mapBounds.bounds.min.z;
+        zMax = mapBounds.bounds.max.z;
+
+        camOrthoSize = mainCam.orthographicSize;
+        camRatio = (xMax + camOrthoSize) / 2f;
     }
 
     // Update is called once per frame
@@ -38,8 +54,12 @@ public class CameraStatic : MonoBehaviour{
             }
         }
     }
-    void LateUpdate(){
-        transform.position = camPosition.transform.position;
+
+    private void LateUpdate()
+    {
+        camX = Mathf.Clamp(camPosition.transform.position.x, xMin + camOrthoSize, xMax - camOrthoSize);
+        camZ = Mathf.Clamp(camPosition.transform.position.z, zMin + camOrthoSize, zMax - camOrthoSize);
+        transform.position = new Vector3(camX, camPosition.transform.position.y, camZ);
     }
 
     void OnDrawGizmosSelected(){

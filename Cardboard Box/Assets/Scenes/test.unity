@@ -1704,7 +1704,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1985153974}
   - component: {fileID: 1985153975}
-  - component: {fileID: 1985153976}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1743,21 +1742,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camPosition: {fileID: 1395458304}
   halfwayPoint: {fileID: 744914044}
-  currTransparent: []
+  mapBounds: {fileID: 892816592}
+  mainCam: {fileID: 1923714267}
   alphaValue: 0.5
---- !u!65 &1985153976
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985153973}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12, y: 1, z: 4.97}
-  m_Center: {x: 0, y: 4.5, z: -3.2}
 --- !u!1 &1998862405
 GameObject:
   m_ObjectHideFlags: 0
