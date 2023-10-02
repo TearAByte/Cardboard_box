@@ -16,7 +16,7 @@ public class CameraStatic : MonoBehaviour{
     private Camera mainCam;
 
     private float xMin, xMax, zMin, zMax, camX, camZ;
-    private float camOrthoSize, camRatio;
+    private float camOrthoSize;
 
     [SerializeField]
     private float alphaValue = 0.5f;
@@ -30,7 +30,6 @@ public class CameraStatic : MonoBehaviour{
         zMax = mapBounds.bounds.max.z;
 
         camOrthoSize = mainCam.orthographicSize;
-        camRatio = (xMax + camOrthoSize) / 2f;
     }
 
     // Update is called once per frame
