@@ -15,18 +15,20 @@ public class MobSusState : State
         if (enemyStats.canSeeTarget)
         {
             enemyStats.exSus.SetActive(true);
-            var q = Quaternion.LookRotation(enemyStats.targetPlayer.position - transform.position);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, q, enemyStats.rotateSpeed * Time.deltaTime);
-            Debug.DrawRay(transform.position, transform.forward, Color.red);
-            if (Physics.Raycast(transform.position, Vector3.forward, enemyStats.enemyFOV.viewRadius, enemyStats.enemyFOV.playerTarget))
+            if (enemyStats.targetPlayer != null)
             {
-                enemyStats.exSus.SetActive(false);
-                enemyStats.exAlert.SetActive(true);
-            }
-            else
-            {
-                enemyStats.exSus.SetActive(true);
-                enemyStats.exAlert.SetActive(false);
+                var q = Quaternion.LookRotation(enemyStats.targetPlayer.position - transform.position);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, q, enemyStats.rotateSpeed * Time.deltaTime);
+                if (enemyStats.canSeeCenterTarget)
+                {
+                    enemyStats.exSus.SetActive(false);
+                    enemyStats.exAlert.SetActive(true);
+                }
+                else
+                {
+                    enemyStats.exSus.SetActive(true);
+                    enemyStats.exAlert.SetActive(false);
+                }
             }
 
         }

@@ -509,7 +509,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewRadius: 10
-  viewAngle: 81
+  viewAngle: 60
+  viewCenterAngle: 20
   playerTarget:
     serializedVersion: 2
     m_Bits: 64

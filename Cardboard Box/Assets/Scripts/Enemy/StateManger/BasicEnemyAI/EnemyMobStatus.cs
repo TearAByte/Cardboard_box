@@ -12,6 +12,7 @@ public class EnemyMobStatus : MonoBehaviour
 
     [Header("Booleans")]
     public bool canSeeTarget = false;
+    public bool canSeeCenterTarget = false;
 
     [Header("GameObjects")]
     public GameObject exSus;
@@ -32,6 +33,7 @@ public class EnemyMobStatus : MonoBehaviour
     }
     private void Update()
     {
+        canSeeCenterTarget = enemyFOV.canSeeCenterTarget;
         canSeeTarget = enemyFOV.canSeeTarget;
         targetPlayer = enemyFOV.targetPlayer; //retrieves target transform
     }
