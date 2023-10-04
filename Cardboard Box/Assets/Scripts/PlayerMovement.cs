@@ -10,18 +10,15 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput playerInput;
     private CharacterController PlayerControl;
 
-    private void OnEnable()
-    {
+    private void OnEnable(){
         playerInput.TopDown.Enable();
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable(){
         playerInput.TopDown.Disable();
     }
     // Start is called before the first frame update
-    void Awake()
-    {
+    void Awake(){
         playerInput = new PlayerInput();
         PlayerControl = GetComponent<CharacterController>();
     }
