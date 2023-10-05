@@ -7,7 +7,12 @@ public class PlayerInteract : MonoBehaviour{
     private Collider[] hits;
     private PlayerInput playerInput;
 
+    [SerializeField]
     private float interactRange = 2f;
+
+    private void Awake(){
+        playerInput = new PlayerInput();
+    }
 
     private void OnEnable(){
         playerInput.TopDown.Enable();
@@ -17,17 +22,15 @@ public class PlayerInteract : MonoBehaviour{
         playerInput.TopDown.Disable();
     }
 
-    void Start(){
-        
-    }
-
     // Update is called once per frame
     void Update(){
         hits = Physics.OverlapSphere(transform.position, interactRange);
 
         foreach(var hit in hits){
-            if(hit.gameObject.tag == "Item" && playerInput.TopDown.Interact.IsPressed()){
-                //insert code for what happens to item when interacted
+            if(hit.gameObject.tag == "Item" && playerInput.TopDown.Interact.WasPerformedThisFrame()){
+                if(hit.gameObject.TryGetComponent<InteractableInterface>(out InteractableInterface item)){
+                    item.Interact();
+                }
             }
         }
     }
