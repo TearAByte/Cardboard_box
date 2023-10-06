@@ -24,12 +24,13 @@ public class PlayerInteract : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        hits = Physics.OverlapSphere(transform.position, interactRange);
+        hits = Physics.OverlapSphere(transform.position + transform.TransformDirection(new Vector3(0, 0, 1.3f)), interactRange);
 
         foreach(var hit in hits){
             if(hit.gameObject.tag == "Item" && playerInput.TopDown.Interact.WasPerformedThisFrame()){
-                if(hit.gameObject.TryGetComponent<InteractableInterface>(out InteractableInterface item)){
+                if(hit.gameObject.TryGetComponent(out InteractableInterface item)){
                     item.Interact();
+                    break;
                 }
             }
         }
@@ -38,6 +39,6 @@ public class PlayerInteract : MonoBehaviour{
     void OnDrawGizmosSelected(){
         // Draw a semitransparent red cube at the transforms position
         Gizmos.color = new Color(0, 1, 0, 0.5f);
-        Gizmos.DrawSphere(transform.position, interactRange);
+        Gizmos.DrawSphere(transform.position + transform.TransformDirection(new Vector3(0, 0, 1.3f)), interactRange);
     }
 }

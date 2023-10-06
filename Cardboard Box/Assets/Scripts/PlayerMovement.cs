@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
-{
-    [SerializeField]
-    private float speed, rotationSpeed;
+public class PlayerMovement : MonoBehaviour{
+    public float speed, rotationSpeed;
     private PlayerInput playerInput;
     private CharacterController PlayerControl;
 
@@ -36,5 +34,9 @@ public class PlayerMovement : MonoBehaviour
             Quaternion toRotate = Quaternion.LookRotation(keyInput3D, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, rotationSpeed * Time.deltaTime);
         }
+    }
+
+    public void PlayerCaught(){
+        this.enabled = false;
     }
 }
