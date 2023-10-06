@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 using UnityEngine;
 
 public class MobSusState : State
@@ -23,11 +24,13 @@ public class MobSusState : State
                 {
                     enemyStats.exSus.SetActive(false);
                     enemyStats.exAlert.SetActive(true);
+                    //return enemyStats.alertState;
                 }
                 else
                 {
                     enemyStats.exSus.SetActive(true);
                     enemyStats.exAlert.SetActive(false);
+                    //return enemyStats.investigateState;
                 }
             }
 
@@ -36,6 +39,7 @@ public class MobSusState : State
         {
             enemyStats.exSus.SetActive(false);
             enemyStats.exAlert.SetActive(false);
+            //return enemyStats.investigateState;
         }
         return this;
     }

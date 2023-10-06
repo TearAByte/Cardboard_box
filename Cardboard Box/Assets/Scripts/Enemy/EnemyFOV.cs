@@ -73,15 +73,18 @@ public class EnemyFOV : MonoBehaviour
                     }
                     else
                     {
-                        canSeeTarget = false;
-                        targetPlayer = null;
+                        CantSeeTarget();
                     }
                 }
+                else
+                {
+                    CantSeeTarget();
+                }
+
             }
             else
             {
-                canSeeTarget = false;
-                targetPlayer = null;
+                CantSeeTarget();
             }
 
         }
@@ -112,16 +115,30 @@ public class EnemyFOV : MonoBehaviour
                     }
                     else
                     {
-                        canSeeCenterTarget = false;
+                        CantSeeCenterTarget();
                     }
+                }
+                else
+                {
+                    CantSeeCenterTarget();
                 }
             }
             else
             {
-                canSeeCenterTarget = false;
+                CantSeeCenterTarget();
             }
 
         }
+    }
+
+    void CantSeeTarget()
+    {
+        canSeeTarget = false;
+        targetPlayer = null;
+    }
+    void CantSeeCenterTarget()
+    {
+        canSeeCenterTarget = false;
     }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
@@ -132,6 +149,7 @@ public class EnemyFOV : MonoBehaviour
         //converts trigo degrees to unity or vice verse idk which one lmaooooo
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
+
 
 }/*
 //----------OLD BACK-UP CODE----------------------

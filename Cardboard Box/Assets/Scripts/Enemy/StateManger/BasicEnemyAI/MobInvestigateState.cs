@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class MobIdleState : State
+public class MobInvestigateState : State
 {
 
     EnemyMobStatus enemyStats;
@@ -13,10 +13,6 @@ public class MobIdleState : State
     }
     public override State RunCurrentState()
     {
-        if (enemyStats.canSeeTarget)
-        {
-            return enemyStats.susState;
-        }
         return this;
     }
 

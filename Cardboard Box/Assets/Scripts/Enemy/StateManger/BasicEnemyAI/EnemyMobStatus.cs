@@ -9,6 +9,9 @@ public class EnemyMobStatus : MonoBehaviour
     public EnemyFOV enemyFOV;
     public MobIdleState idleState;
     public MobSusState susState;
+    public MobAlertState alertState;
+    public MobInvestigateState investigateState;
+    
 
     [Header("Booleans")]
     public bool canSeeTarget = false;
@@ -21,13 +24,18 @@ public class EnemyMobStatus : MonoBehaviour
     
     [Header("Stats")]
     public float rotateSpeed = 1f;
-    
+
+    [Header("NavMesh Shit")]
+    public NavMeshAgent mobAI;
 
     private void Awake()
     {
         idleState = gameObject.GetComponent<MobIdleState>();
         susState = gameObject.GetComponent<MobSusState>();
         enemyFOV = gameObject.GetComponent<EnemyFOV>();
+        alertState = gameObject.GetComponent<MobAlertState>();
+        investigateState = gameObject.GetComponent<MobInvestigateState>();
+        mobAI = gameObject.GetComponent<NavMeshAgent>();
         exAlert.SetActive(false);
         exSus.SetActive(false);
     }
