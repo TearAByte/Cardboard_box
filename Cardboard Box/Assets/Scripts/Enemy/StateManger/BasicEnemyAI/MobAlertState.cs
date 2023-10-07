@@ -17,11 +17,22 @@ public class MobAlertState : State
         if (enemyStats.canSeeTarget)
         {
             if (enemyStats.targetPlayer != null)
+            { 
+                enemyStats.lastKnownTargetLocation = enemyStats.targetPlayer;
                 enemyStats.mobAI.SetDestination(enemyStats.targetPlayer.position);
+            }
         }
         else
         {
-            //return enemyStats.idleState;
+            if (enemyStats.lastKnownTargetLocation != null)
+                enemyStats.mobAI.SetDestination(enemyStats.lastKnownTargetLocation.position);
+            // Check if we've reached the destination
+            enemyStats.NavMeshCheckDestination();
+            if(enemyStats.destinationReached)
+            {
+                enemyStats.destinationReached = false;
+                return enemyStats.idleState;
+            }
         }
         return this;
     }

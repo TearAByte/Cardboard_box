@@ -18,19 +18,14 @@ public class MobSusState : State
             enemyStats.exSus.SetActive(true);
             if (enemyStats.targetPlayer != null)
             {
+                enemyStats.lastKnownTargetLocation = enemyStats.targetPlayer;
                 var q = Quaternion.LookRotation(enemyStats.targetPlayer.position - transform.position);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, q, enemyStats.rotateSpeed * Time.deltaTime);
                 if (enemyStats.canSeeCenterTarget)
                 {
                     enemyStats.exSus.SetActive(false);
                     enemyStats.exAlert.SetActive(true);
-                    //return enemyStats.alertState;
-                }
-                else
-                {
-                    enemyStats.exSus.SetActive(true);
-                    enemyStats.exAlert.SetActive(false);
-                    //return enemyStats.investigateState;
+                    return enemyStats.alertState;
                 }
             }
 
@@ -39,7 +34,10 @@ public class MobSusState : State
         {
             enemyStats.exSus.SetActive(false);
             enemyStats.exAlert.SetActive(false);
-            //return enemyStats.investigateState;
+            if(enemyStats.lastKnownTargetLocation != null)
+            {
+                return enemyStats.investigateState;
+            }
         }
         return this;
     }

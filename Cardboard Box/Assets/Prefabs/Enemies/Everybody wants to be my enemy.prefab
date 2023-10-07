@@ -408,6 +408,8 @@ GameObject:
   - component: {fileID: 3250982355932946367}
   - component: {fileID: 8969742202824128059}
   - component: {fileID: 4072078220426519740}
+  - component: {fileID: 1098902517659188280}
+  - component: {fileID: 6921027828834129746}
   m_Layer: 0
   m_Name: Everybody wants to be my enemy
   m_TagString: Untagged
@@ -511,7 +513,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   viewRadius: 10
   viewAngle: 60
-  viewCenterAngle: 20
+  viewCenterAngle: 10
+  lostVisualTimer: 2
   playerTarget:
     serializedVersion: 2
     m_Bits: 64
@@ -556,7 +559,9 @@ MonoBehaviour:
   exSus: {fileID: 1229075547935302316}
   exAlert: {fileID: 427160452205259027}
   targetPlayer: {fileID: 0}
-  rotateSpeed: 70
+  lastKnownTargetLocation: {fileID: 0}
+  rotateSpeed: 150
+  mobAI: {fileID: 0}
 --- !u!114 &3250982355932946367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,6 +608,30 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1098902517659188280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8091873154943076693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94d0c3fae79c4b46bee73c58bf62c29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6921027828834129746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8091873154943076693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee39a0b11e9dd584f975b8af4ef16817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8572300569757208916
 GameObject:
   m_ObjectHideFlags: 0

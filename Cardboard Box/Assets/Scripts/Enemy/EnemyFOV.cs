@@ -9,6 +9,8 @@ public class EnemyFOV : MonoBehaviour
     public float viewAngle;
     [Range(0, 360)]
     public float viewCenterAngle;
+    public float lostVisualTimer;
+    float lostVisualTime = 0;
 
     public LayerMask playerTarget;
     public LayerMask obstacles;
@@ -133,8 +135,14 @@ public class EnemyFOV : MonoBehaviour
 
     void CantSeeTarget()
     {
-        canSeeTarget = false;
-        targetPlayer = null;
+        //timer for losing the target completely
+        lostVisualTime += Time.deltaTime;
+        if (lostVisualTime >= lostVisualTimer)
+        {
+            lostVisualTime = 0;
+            canSeeTarget = false;
+            targetPlayer = null;
+        }
     }
     void CantSeeCenterTarget()
     {

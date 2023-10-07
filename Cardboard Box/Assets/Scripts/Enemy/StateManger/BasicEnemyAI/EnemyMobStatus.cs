@@ -16,11 +16,13 @@ public class EnemyMobStatus : MonoBehaviour
     [Header("Booleans")]
     public bool canSeeTarget = false;
     public bool canSeeCenterTarget = false;
+    public bool destinationReached = false;
 
     [Header("GameObjects")]
     public GameObject exSus;
     public GameObject exAlert;
     public Transform targetPlayer = null;
+    public Transform lastKnownTargetLocation = null;
     
     [Header("Stats")]
     public float rotateSpeed = 1f;
@@ -44,5 +46,19 @@ public class EnemyMobStatus : MonoBehaviour
         canSeeCenterTarget = enemyFOV.canSeeCenterTarget;
         canSeeTarget = enemyFOV.canSeeTarget;
         targetPlayer = enemyFOV.targetPlayer; //retrieves target transform
+    }
+    public void NavMeshCheckDestination()
+    {
+        // Check if we've reached the destination
+        if (!mobAI.pathPending)
+        {
+            if (mobAI.remainingDistance <= mobAI.stoppingDistance)
+            {
+                if (!mobAI.hasPath || mobAI.velocity.sqrMagnitude == 0f)
+                {
+                    destinationReached = true; 
+                }
+            }
+        }
     }
 }

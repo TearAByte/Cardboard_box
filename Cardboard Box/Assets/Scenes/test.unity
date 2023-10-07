@@ -539,10 +539,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8091873154943076692, guid: dd04d1f5a514a464bbb93e539fb3902a, type: 3}
-      propertyPath: viewCenterAngle
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8091873154943076693, guid: dd04d1f5a514a464bbb93e539fb3902a, type: 3}
       propertyPath: m_Name
       value: Everybody wants to be my enemy (1)
